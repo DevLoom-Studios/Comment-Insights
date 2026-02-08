@@ -1,0 +1,20 @@
+
+File: C:\Users\nillo\OneDrive\Desktop\Comments Engine\nexus-insights\src\app\dashboard\[id]\competitor\page.tsx
+  4:20 - 'redirect' is defined but never used. (@typescript-eslint/no-unused-vars)
+  54:25 - Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element (@next/next/no-img-element)
+
+File: C:\Users\nillo\OneDrive\Desktop\Comments Engine\nexus-insights\src\app\dashboard\[id]\page.tsx
+  5:10 - 'ArrowLeft' is defined but never used. (@typescript-eslint/no-unused-vars)
+  48:25 - Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element (@next/next/no-img-element)
+
+File: C:\Users\nillo\OneDrive\Desktop\Comments Engine\nexus-insights\src\app\dashboard\layout.tsx
+  5:10 - 'BarChart3' is defined but never used. (@typescript-eslint/no-unused-vars)
+
+File: C:\Users\nillo\OneDrive\Desktop\Comments Engine\nexus-insights\src\app\dashboard\page.tsx
+  90:37 - Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element (@next/next/no-img-element)
+
+File: C:\Users\nillo\OneDrive\Desktop\Comments Engine\nexus-insights\src\components\StepLoader.tsx
+  33:27 - 'isPending' is assigned a value but never used. (@typescript-eslint/no-unused-vars)
+
+File: C:\Users\nillo\OneDrive\Desktop\Comments Engine\nexus-insights\src\components\UserButton.tsx
+  26:21 - Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element (@next/next/no-img-element)

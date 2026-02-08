@@ -1,0 +1,152 @@
+// Nexus Insights - Database Schema
+// Production-grade YouTube Comment Intelligence Platform
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String?
+  email         String          @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  // Application specific fields
+  plan          String          @default("FREE") // FREE, PRO, AGENCY
+  analyses      VideoAnalysis[]
+  competitors   CompetitorGap[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([provider, providerAccountId])
+}
+ 
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+ 
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+ 
+  @@id([identifier, token])
+}
+
+model VideoAnalysis {
+  id              String   @id @default(cuid())
+  userId          String?
+  youtubeId       String
+  title           String
+  thumbnail       String
+  channelTitle    String?
+  totalComments   Int      @default(0)
+  
+  // The Four Core Indices (calculated mathematically, not AI)
+  painIndex       Int      @default(0) // 0-100: Bugs × Severity
+  demandVelocity  Int      @default(0) // 0-100: Features × Urgency
+  loyaltyDepth    Int      @default(0) // 0-100: Defenders vs Detractors
+  confusionScore  Int      @default(0) // 0-100: % of questions
+  
+  // AI Results (Stored as JSON for flexibility)
+  summary         String   @db.Text
+  themes          Json     // Array of topic clusters with sentiment
+  featureRequests Json     // ["USB-C", "Dark Mode"]
+  bugReports      Json     // ["Crash on login", "Audio sync"]
+  contentIdeas    Json     @default("[]") // Unique/viral comment ideas
+  actionPlan      Json     // Immediate fixes + content opportunities
+  
+  // Filtering stats
+  totalFetched    Int      @default(0)
+  trashCount      Int      @default(0)
+  
+  cachedAt        DateTime @default(now())
+  
+  user            User?    @relation(fields: [userId], references: [id])
+  comments        CachedComment[]
+  
+  @@unique([youtubeId]) // One analysis per video (global cache)
+  @@index([userId])
+  @@index([cachedAt])
+}
+
+model CompetitorGap {
+  id              String   @id @default(cuid())
+  userId          String
+  myVideoId       String
+  theirVideoId    String
+  
+  // Battle Card Data
+  winningPoints   Json     // What we do better
+  losingPoints    Json     // What they do better
+  contentGaps     Json     // Unanswered questions / opportunities
+  whyUsHooks      Json     // Marketing hooks based on competitor weaknesses
+  
+  // Snapshot metrics for comparison
+  myPainIndex     Int      @default(0)
+  theirPainIndex  Int      @default(0)
+  
+  createdAt       DateTime @default(now())
+  user            User     @relation(fields: [userId], references: [id])
+  
+  @@index([userId])
+  @@index([myVideoId, theirVideoId])
+}
+
+model CachedComment {
+  id          String        @id @default(cuid())
+  analysisId  String
+  
+  // Original data
+  youtubeId   String        // Comment ID from YouTube
+  text        String        @db.Text
+  author      String
+  authorImage String?
+  likes       Int           @default(0)
+  publishedAt DateTime?
+  
+  // AI Classification
+  category    String        // BUG, FEATURE, PRAISE, COMPLAINT, QUESTION, NOISE, CONTENT_IDEA
+  topic       String?       // e.g., "Battery", "Pricing", "UI"
+  intensity   Int           @default(5) // 1-10 scale
+  segment     String        @default("Unknown") // Pro, Beginner, Switcher, Unknown
+  sarcasm     Boolean       @default(false)
+  
+  analysis    VideoAnalysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  
+  @@index([analysisId])
+  @@index([category])
+}

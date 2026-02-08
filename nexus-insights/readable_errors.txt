@@ -1,0 +1,21 @@
+
+File: C:\Users\nillo\OneDrive\Desktop\Comments Engine\nexus-insights\src\app\api\analyze\route.ts
+  91:42 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+  92:60 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+  93:50 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+  94:54 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+  95:50 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+  111:42 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+  112:60 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+  113:50 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+  114:54 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+  115:50 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+
+File: C:\Users\nillo\OneDrive\Desktop\Comments Engine\nexus-insights\src\app\api\compare\route.ts
+  62:46 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+  63:18 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+
+File: C:\Users\nillo\OneDrive\Desktop\Comments Engine\nexus-insights\src\app\dashboard\[id]\competitor\page.tsx
+  122:64 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+  141:63 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
+  166:70 - Unexpected any. Specify a different type. (@typescript-eslint/no-explicit-any)
